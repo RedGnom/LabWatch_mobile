@@ -1,0 +1,73 @@
+package com.example.labwatch.ui.fragments;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.labwatch.R;
+import com.example.labwatch.apapters.NodeAdapter;
+import com.example.labwatch.data.api.ApiClient;
+import com.example.labwatch.data.models.Node;
+import com.example.labwatch.data.models.NodesResponse;
+import java.util.List;
+import java.util.stream.Collectors;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
+// Отображение фрагмента с узлами
+public class NodesFragment extends Fragment {
+
+    private NodeAdapter adapter;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_nodes, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView recyclerView = view.findViewById(R.id.nodesRecyclerView);
+        // Сетка из 3 колонок
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
+
+        adapter = new NodeAdapter(node ->
+                Toast.makeText(requireContext(), node.getId(), Toast.LENGTH_SHORT).show()
+        );
+        recyclerView.setAdapter(adapter);
+
+        // Загружаем данные
+        loadNodes();
+    }
+
+    private void loadNodes() {
+        ApiClient.getApi().fetchNodes().enqueue(new Callback<NodesResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<NodesResponse> call, @NonNull Response<NodesResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Node> nodes = response.body().getNodeIds().stream()
+                            .map(Node::new)
+                            .collect(Collectors.toList());
+                    adapter.update(nodes); // <-- Обновляем список
+                } else {
+                    Toast.makeText(requireContext(), "Ошибка: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<NodesResponse> call, @NonNull Throwable t) {
+                Toast.makeText(requireContext(), "Нет связи", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+}
