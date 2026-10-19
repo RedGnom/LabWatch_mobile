@@ -2,11 +2,18 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+// Чтение переменной из local.properties
+def localProps = new Properties()
+def localFile = rootProject.file("local.properties")
+if (localFile.exists()) {
+    localFile.withInputStream { localProps.load(it) }
+}
+def apiBaseUrl = localProps.getProperty("api.base.url") ?: "http://10.0.2.2:8080/"
+
 android {
     namespace 'com.example.labwatch'
-    compileSdk {
-        version = release(37)
-    }
+
+    compileSdk 37
 
     defaultConfig {
         applicationId "com.example.labwatch"
@@ -16,15 +23,22 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'API_BASE_URL', "\"$apiBaseUrl\""
+
     }
 
     buildTypes {
         release {
-            optimization {
-                enable false
-            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        buildConfig true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
