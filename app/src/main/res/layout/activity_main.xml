@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
     <FrameLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
@@ -26,8 +25,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/nav_menu"
-        app:labelVisibilityMode="labeled" />
+        android:layout_height="88dp"
+        app:itemIconSize="28dp"
+        app:itemTextAppearanceActive="@style/TextAppearance.LabWatch.BottomNav.Active"
+        app:itemTextAppearanceInactive="@style/TextAppearance.LabWatch.BottomNav.Inactive"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/nav_menu" />
 
 </LinearLayout>
