@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.google.android.material.snackbar.Snackbar;
 
 
 // Отображение фрагмента с узлами
@@ -66,7 +67,10 @@ public class NodesFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<NodesResponse> call, @NonNull Throwable t) {
-                Toast.makeText(requireContext(), "Нет связи", Toast.LENGTH_LONG).show();
+                Snackbar.make(requireView(), "Нет связи с сервером", Snackbar.LENGTH_LONG)
+                        .setAnchorView(requireActivity().findViewById(R.id.bottomNav))
+                        .setAction("Повторить", v -> loadNodes())
+                        .show();
             }
         });
     }
