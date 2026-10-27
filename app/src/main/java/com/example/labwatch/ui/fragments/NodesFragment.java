@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.labwatch.R;
-import com.example.labwatch.apapters.NodeAdapter;
+import com.example.labwatch.adapters.NodeAdapter;
 import com.example.labwatch.data.api.ApiClient;
 import com.example.labwatch.data.models.Node;
 import com.example.labwatch.data.models.NodesResponse;

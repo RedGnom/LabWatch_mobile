@@ -1,4 +1,4 @@
-package com.example.labwatch.apapters;
+package com.example.labwatch.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
