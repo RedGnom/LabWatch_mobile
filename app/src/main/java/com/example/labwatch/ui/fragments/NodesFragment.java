@@ -39,16 +39,22 @@ public class NodesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.nodesRecyclerView);
-        // Сетка из 3 колонок
-        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 3));
+        // Сетка из 2 колонок: крупные карточки серверов
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
 
-        adapter = new NodeAdapter(node ->
-                Toast.makeText(requireContext(), node.getId(), Toast.LENGTH_SHORT).show()
-        );
+        adapter = new NodeAdapter(this::openNodeDetails);
         recyclerView.setAdapter(adapter);
 
         // Загружаем данные
         loadNodes();
+    }
+
+    // Переход к экрану узла с его данными (в back stack для кнопки «назад»)
+    private void openNodeDetails(Node node) {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentContainer, NodeDetailFragment.newInstance(node.getId()))
+                .addToBackStack(null)
+                .commit();
     }
 
     private void loadNodes() {
