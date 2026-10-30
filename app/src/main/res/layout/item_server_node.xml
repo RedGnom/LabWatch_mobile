@@ -4,15 +4,15 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="6dp"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:clickable="true"
     android:focusable="true">
 
     <ImageView
         android:id="@+id/nodeIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:src="@drawable/server_icon"
         android:contentDescription="Иконка сервера" />
 
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сервер 01"
-        android:textSize="12sp"
+        android:textSize="16sp"
         android:gravity="center"
-        android:layout_marginTop="6dp" />
+        android:layout_marginTop="4dp" />
 </LinearLayout>
