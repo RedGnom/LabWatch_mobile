@@ -25,10 +25,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
-        app:itemIconSize="28dp"
-        app:itemTextAppearanceActive="@style/TextAppearance.LabWatch.BottomNav.Active"
-        app:itemTextAppearanceInactive="@style/TextAppearance.LabWatch.BottomNav.Inactive"
+        android:layout_height="80dp"
+        app:itemIconSize="32dp"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/nav_menu" />
 

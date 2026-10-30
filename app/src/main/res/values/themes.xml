@@ -10,14 +10,4 @@
     </style>
 
     <style name="Theme.LabWatch" parent="Base.Theme.LabWatch" />
-
-    <!-- Крупный текст для нижнего меню -->
-    <style name="TextAppearance.LabWatch.BottomNav.Active" parent="TextAppearance.Material3.LabelLarge">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.LabWatch.BottomNav.Inactive" parent="TextAppearance.Material3.LabelMedium">
-        <item name="android:textSize">13sp</item>
-    </style>
 </resources>
